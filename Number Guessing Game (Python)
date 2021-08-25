@@ -1,0 +1,49 @@
+import math
+import random
+print('Welcome To My Guessing Game \n')
+print("Here are the rules: \n'Guess a number between 1 and 100.")
+rule={"1. Difference between real vlue & your guess < 10": '"Warm!"',
+     '2. Difference between real vlue & your guess > 10': '"Cold!"',
+     '3. your new guess closer than previous guess to real value':'"WARMER!"',
+     '4. your new guess farther than previous guess to real value':'"COLDER!"',
+     '5. if you guess true':'"Congratulations you did it in "x" try"'}
+for x in rule:
+  print(" ",x,": ",*rule[x])
+
+num= int(input("Please Guess A Number From 1 to 100:- "))
+rand_num = random.randint(1, 100)
+max_guesses = round(math.log(200 - 1 + 2, 2))
+
+if num<1:
+    print (*"OUT OF BOUNDS")
+    
+elif num>100:
+    print (*"OUT OF BOUNDS")
+    
+else:
+    print("You have",max_guesses,"chances to guess the number!\n")    
+    count = 0
+    while count < max_guesses:
+        count = count + 1
+    
+        
+        playerGuess = int(input("Guess a number between 1 and 100: "))
+        d=abs(playerGuess - rand_num)
+        
+        if playerGuess == rand_num:
+            print("Congratulations you did it in",count,"try!")
+            break
+        elif d > 10:
+            print("Cold! Guess Again!")
+            print("\tYou use",count,"chances to guess the number!\n")
+        elif d > playerGuess:
+            print("colder! Guess Again!")
+            print("\tYou use",count,"chances to guess the number!\n")                       
+        elif d < 10:
+            print("Warm! Guess Again!")
+            print("You use",count,"chances to guess the number!\n")
+        elif d < playerGuess:
+            print("warmer! Guess Again!")
+            print("\tYou use",count,"chances to guess the number!\n")               
+    else:
+        print("  ",*'You have lost')    
